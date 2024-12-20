@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>Real-Time Argument Mapper</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #fdf3e7;
+      font-family: "Open Sans", sans-serif;
+      color: #3e3a37;
+    }
+
+    header {
+      background-color: #f2e7d5;
+      padding: 16px;
+      text-align: center;
+      border-bottom: 1px solid #dfcebd;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 1.8rem;
+      color: #4a4743;
+    }
+
+    main {
+      padding: 20px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .button-row {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    button {
+      background-color: #c7b299;
+      border: 1px solid #b8a28b;
+      border-radius: 4px;
+      padding: 8px 16px;
+      color: #fff;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+    button:hover {
+      background-color: #af9b85;
+    }
+
+    #recordingIndicator {
+      background-color: #c7b299;
+      display: none;
+      font-weight: bold;
+    }
+
+    .card {
+      background-color: #fff;
+      border: 1px solid #dfcebd;
+      border-radius: 6px;
+      padding: 16px;
+      margin-bottom: 16px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+      position: relative;
+    }
+
+    .card h2 {
+      margin-top: 0;
+      margin-bottom: 8px;
+      color: #4a4743;
+    }
+
+    .card pre {
+      white-space: pre-wrap;
+      font-size: 0.95rem;
+      line-height: 1.25rem;
+    }
+
+    #argumentsSummary {
+      border: 1px solid #dfcebd;
+      border-radius: 4px;
+      padding: 10px;
+      min-height: 100px;
+      background-color: #f9f9f9;
+      outline: none;
+      font-family: "Open Sans", sans-serif;
+      line-height: 1.5;
+      white-space: pre-wrap;
+    }
+
+    .processing-overlay {
+      display: none;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(253, 243, 231, 0.9);
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      color: #4a4743;
+    }
+
+    .processing-overlay.active {
+      display: flex;
+    }
+
+    .processing-spinner {
+      border: 3px solid #f2e7d5;
+      border-top: 3px solid #c7b299;
+      border-radius: 50%;
+      width: 24px;
+      height: 24px;
+      animation: spin 1s linear infinite;
+      margin-right: 10px;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Real-Time Argument Mapper</h1>
+  </header>
+
+  <main>
+    <div class="button-row">
+      <button id="startBtn">Start Recording</button>
+      <button id="stopBtn" style="display: none;">Stop Recording</button>
+      <button id="recordingIndicator">Recording...</button>
+      <button id="saveMappingBtn">Save Mapping</button>
+    </div>
+
+    <div class="card">
+      <h2>Transcript:</h2>
+      <pre id="transcriptText"></pre>
+    </div>
+
+    <div class="card">
+      <h2>Key Arguments:</h2>
+      <div id="argumentsSummary" contenteditable="true">
+        Click here to edit key arguments...
+      </div>
+      <div class="processing-overlay">
+        <div class="processing-spinner"></div>
+        <span>Processing recording...</span>
+      </div>
+    </div>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
